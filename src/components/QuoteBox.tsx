@@ -5,15 +5,7 @@ import { Quote, QuotesResponse } from "../types/QuotesResponse";
 import "./QuoteBox.scss";
 
 export default function QuoteBox() {
-  const colors = [
-    "red",
-    "green",
-    "blue",
-    "purple",
-    "yellow",
-    "pink",
-    "aliceblue",
-  ];
+  const colors = ["#F5BFD2", "#E5DB9C", "#D0BCAC", "#BEB4C5", "#E6A57E"];
 
   function randomColor(colors: string[]): string {
     return colors[Math.floor(Math.random() * colors.length)];
@@ -24,7 +16,7 @@ export default function QuoteBox() {
     quote: "",
     author: "",
   });
-  const [currentColor, setCurrentColor] = useState(colors[0]);
+  const [currentColor, setCurrentColor] = useState(randomColor(colors));
 
   useEffect(() => {
     document.querySelector("body")!.style.backgroundColor = currentColor;
@@ -52,6 +44,13 @@ export default function QuoteBox() {
     }
 
     _fetchData();
+  }, []);
+
+  useEffect(() => {
+    setTimeout(
+      () => document.querySelector("body")?.removeAttribute("class"),
+      1
+    );
   }, []);
 
   return (

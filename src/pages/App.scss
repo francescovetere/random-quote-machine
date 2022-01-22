@@ -4,13 +4,24 @@
   font-family: "Varela Round", sans-serif;
 }
 
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
 body {
   padding: 100px;
+  transition: 1s;
 
   #app {
     display: flex;
     justify-content: center;
+
+    p, button, a {
+      transition: 1s;
+    }
   }
 }
-
-

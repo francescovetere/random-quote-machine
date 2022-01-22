@@ -22,12 +22,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    
     .new-quote {
       padding: 10px;
       border: none;
-      border-radius: 3px;
+      border-radius: 8px;
       color: white;
+      font-size: 1em;
       cursor: pointer;
     }
   }
