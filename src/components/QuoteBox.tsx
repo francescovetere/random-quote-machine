@@ -2,13 +2,45 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { quotesUrl } from "../config";
 import { Quote, QuotesResponse } from "../types/QuotesResponse";
+import "./QuoteBox.scss";
 
 export default function QuoteBox() {
+  const colors = [
+    "red",
+    "green",
+    "blue",
+    "purple",
+    "yellow",
+    "pink",
+    "aliceblue",
+  ];
+
+  function randomColor(colors: string[]): string {
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [currentQuote, setCurrentQuote] = useState<Quote>({
     quote: "",
     author: "",
   });
+  const [currentColor, setCurrentColor] = useState(colors[0]);
+
+  useEffect(() => {
+    document.querySelector("body")!.style.backgroundColor = currentColor;
+
+    (document.querySelector(".text") as HTMLElement).style.color = currentColor;
+
+    (document.querySelector(".author") as HTMLElement).style.color =
+      currentColor;
+
+    (document.querySelector(".tweet-quote") as HTMLElement).style.color =
+      currentColor;
+
+    (
+      document.querySelector(".new-quote") as HTMLElement
+    ).style.backgroundColor = currentColor;
+  }, [currentColor]);
 
   useEffect(() => {
     async function _fetchData() {
@@ -26,28 +58,32 @@ export default function QuoteBox() {
     // TODO: remove ids.
     <div className="quote-box" id="quote-box">
       <p className="text" id="text">
-        {currentQuote.quote}
+        “{currentQuote.quote}”
       </p>
       <p className="author" id="author">
-        {currentQuote.author}
+        ~ {currentQuote.author}
       </p>
-      <a
-        href={`https://twitter.com/intent/tweet?text="${currentQuote.quote}" ~ ${currentQuote.author}&hashtags=quotes`}
-        target="_blank"
-        className="tweet-quote"
-        id="tweet-quote"
-      >
-        Twitter icon
-      </a>
-      <button
-        className="new-quote"
-        id="new-quote"
-        onClick={() =>
-          setCurrentQuote(quotes[Math.floor(Math.random() * quotes.length)])
-        }
-      >
-        New quote
-      </button>
+      <div className="footer">
+        <a
+          href={`https://twitter.com/intent/tweet?text="${currentQuote.quote}" ~ ${currentQuote.author}&hashtags=quotes`}
+          target="_blank"
+          className="tweet-quote"
+          id="tweet-quote"
+        >
+          {/* <i className="fab fa-twitter"></i> */}
+          <i className="fa-3x fa-brands fa-twitter-square"></i>
+        </a>
+        <button
+          className="new-quote"
+          id="new-quote"
+          onClick={() => {
+            setCurrentQuote(quotes[Math.floor(Math.random() * quotes.length)]);
+            setCurrentColor(randomColor(colors));
+          }}
+        >
+          New quote
+        </button>
+      </div>
     </div>
   );
 }
