@@ -4,34 +4,37 @@ import { quotesUrl } from "../config";
 import { Quote, QuotesResponse } from "../types/QuotesResponse";
 import "./QuoteBox.scss";
 
-export default function QuoteBox() {
-  const colors = ["#F5BFD2", "#E5DB9C", "#D0BCAC", "#BEB4C5", "#E6A57E"];
+interface PropsTypes {
+  colors: string[];
+  newQuoteText: string;
+}
 
-  function randomColor(colors: string[]): string {
-    return colors[Math.floor(Math.random() * colors.length)];
-  }
-
+export default function QuoteBox({ colors, newQuoteText }: PropsTypes) {
+  // State
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [currentQuote, setCurrentQuote] = useState<Quote>({
     quote: "",
     author: "",
   });
-  const [currentColor, setCurrentColor] = useState(randomColor(colors));
+  const [currentColor, setCurrentColor] = useState(0);
 
+  // Effects
   useEffect(() => {
-    document.querySelector("body")!.style.backgroundColor = currentColor;
+    document.querySelector("body")!.style.backgroundColor =
+      colors[currentColor];
 
-    (document.querySelector(".text") as HTMLElement).style.color = currentColor;
+    (document.querySelector(".text") as HTMLElement).style.color =
+      colors[currentColor];
 
     (document.querySelector(".author") as HTMLElement).style.color =
-      currentColor;
+      colors[currentColor];
 
     (document.querySelector(".tweet-quote") as HTMLElement).style.color =
-      currentColor;
+      colors[currentColor];
 
     (
       document.querySelector(".new-quote") as HTMLElement
-    ).style.backgroundColor = currentColor;
+    ).style.backgroundColor = colors[currentColor];
   }, [currentColor]);
 
   useEffect(() => {
@@ -52,6 +55,10 @@ export default function QuoteBox() {
       1
     );
   }, []);
+
+  function randomColor(): string {
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
 
   return (
     // TODO: remove ids.
@@ -77,10 +84,10 @@ export default function QuoteBox() {
           id="new-quote"
           onClick={() => {
             setCurrentQuote(quotes[Math.floor(Math.random() * quotes.length)]);
-            setCurrentColor(randomColor(colors));
+            setCurrentColor((prev) => (prev + 1) % colors.length);
           }}
         >
-          New quote
+          {newQuoteText}
         </button>
       </div>
     </div>

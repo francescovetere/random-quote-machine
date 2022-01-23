@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import QuoteBox from "../components/QuoteBox";
 import "./App.scss";
 
-export default function App() {
-
+interface PropsTypes {
+  headerText: string;
+}
+export default function App({ headerText }: PropsTypes) {
   return (
     <>
-      <QuoteBox />
+      <header>{headerText}</header>
+
+      <QuoteBox
+        colors={["red", "green", "blue"]}
+        // colors={["cyan", "yellow", "magenta", "black"]}
+        newQuoteText="New quote"
+      />
     </>
   );
 }

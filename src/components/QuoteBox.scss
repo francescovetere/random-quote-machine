@@ -1,7 +1,7 @@
 .quote-box {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 35px;
   background-color: white;
   padding: 30px 50px;
   border-radius: 10px;
@@ -22,13 +22,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     .new-quote {
       padding: 10px;
       border: none;
       border-radius: 8px;
-      color: white;
       font-size: 1em;
+      font-weight: 600;
+      color: white;
       cursor: pointer;
     }
   }
