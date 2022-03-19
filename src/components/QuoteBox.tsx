@@ -56,10 +56,6 @@ export default function QuoteBox({ colors, newQuoteText }: PropsTypes) {
     );
   }, []);
 
-  function randomColor(): string {
-    return colors[Math.floor(Math.random() * colors.length)];
-  }
-
   return (
     // TODO: remove ids.
     <div className="quote-box" id="quote-box">

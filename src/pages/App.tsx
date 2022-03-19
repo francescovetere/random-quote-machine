@@ -9,10 +9,8 @@ export default function App({ headerText }: PropsTypes) {
   return (
     <>
       <header>{headerText}</header>
-
       <QuoteBox
-        colors={["red", "green", "blue"]}
-        // colors={["cyan", "yellow", "magenta", "black"]}
+        colors={["#FF7676", "#B7A126", "#5DAE8B", "#1F79D9"]}
         newQuoteText="New quote"
       />
     </>
